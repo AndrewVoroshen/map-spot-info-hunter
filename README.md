@@ -1,0 +1,1 @@
+# map-spot-info-hunter
