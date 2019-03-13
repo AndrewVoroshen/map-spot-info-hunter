@@ -50,7 +50,7 @@ class ApiController {
 
 	@GetMapping("/entities")
 	List<CustomEntity> testEntities() {
-		return repo.getEntities();
+		return repo.findAll();
 	}
 }
 
@@ -60,11 +60,19 @@ class CustomEntity {
 
 	@Id
 	@GeneratedValue
-	public Long id;
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
 
 @Repository
 interface CustomRepository extends JpaRepository<CustomEntity, Long> {
 
-	List<CustomEntity> getEntities();
+	List<CustomEntity> findAll();
 }
