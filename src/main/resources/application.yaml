@@ -1,23 +1,23 @@
 server:
   port: 8080
 
-#spring:
+spring:
   # JDBC config
-#  datasource:
-#    url:  jdbc:postgresql://localhost:5432/hunter_db
-#    username: user
-#    password: pass
-#   JPA config
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        jdbc:
-#          lob:
-#            non_contextual_creation: true
-#   Liquibase config
-#  liquibase:
-#    change-log: classpath:db/liquibase-changelog.yaml
-#    enabled: false
+  datasource:
+    url:  jdbc:postgresql://localhost:5432/hunter_db
+    username: hunter_user
+    password: hunter_pass
+  # JPA config
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  # Liquibase config
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.yaml
+    enabled: false
