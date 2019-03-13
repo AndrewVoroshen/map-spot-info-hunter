@@ -1,6 +1,6 @@
-#spring:
-#   JDBC config
-#  datasource:
-#    url:  jdbc:postgresql://localhost:5432/hunter_db
-#    username: hunter_user
-#    password: hunter_pass
+spring:
+  # JDBC config
+  datasource:
+    url:  jdbc:postgresql://localhost:5432/hunter_db
+    username: hunter_user
+    password: hunter_pass
