@@ -1,6 +1,6 @@
 spring:
   # JDBC config
   datasource:
-    url:  jdbc:postgresql://localhost:5432/hunter_db
-    username: hunter_user
-    password: hunter_pass
+    url:  ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
