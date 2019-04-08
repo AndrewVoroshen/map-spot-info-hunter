@@ -10,27 +10,7 @@ public class MapSpotInfoHunterApiApplication {
 		SpringApplication.run(MapSpotInfoHunterApiApplication.class, args);
 	}
 }
-//	@Bean
-//	ApplicationRunner applicationRunner(CustomRepository repo) {
-//		return args -> {
-//			repo.save(new CustomEntity());
-//			repo.save(new CustomEntity());
-//			repo.save(new CustomEntity());
-//		};
-//	}
 
-//@RestController
-//class ApiController {
-//
-//	private final CustomRepository repo;
-//
-//	@Autowired
-//	ApiController(CustomRepository repo) {
-//		this.repo = repo;
-//	}
-//
-//	@GetMapping("/")
-//	String test() {
 //
 //		GeoApiContext context = new GeoApiContext.Builder()
 //				.apiKey("AIzaSyDJ027nmE6e-NagCOJzUnbRl3qhLjs27_s")
@@ -43,39 +23,3 @@ public class MapSpotInfoHunterApiApplication {
 //			e.printStackTrace();
 //		}
 //		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//		System.out.println(gson.toJson(results[0].addressComponents));
-//
-//		return "test";
-//	}
-//
-//	@GetMapping("/entities")
-//	List<CustomEntity> testEntities() {
-//
-//
-//
-//		return repo.findAll();
-//	}
-//}
-//
-//@Entity
-//@Table(name = "custom")
-//class CustomEntity {
-//
-//	@Id
-//	@GeneratedValue
-//	private Long id;
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//}
-//
-//@Repository
-//interface CustomRepository extends JpaRepository<CustomEntity, Long> {
-//
-//	List<CustomEntity> findAll();
-//}
