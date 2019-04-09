@@ -33,8 +33,8 @@ import java.util.Set;
 })
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
 	@Id

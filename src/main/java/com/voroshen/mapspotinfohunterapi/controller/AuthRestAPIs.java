@@ -30,6 +30,8 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
+
+// TODO 09.04.2019: move logic so services
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -57,16 +59,19 @@ public class AuthRestAPIs {
 		String jwt = jwtProvider.generateJwtToken(authentication);
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-		return ResponseEntity.ok(JwtResponse.builder()
-				.token(jwt)
-				.username(userDetails.getUsername())
-				.authorities(userDetails.getAuthorities())
-				.build()
+		return ResponseEntity.ok(
+				JwtResponse.builder()
+						.token(jwt)
+						.type("Bearer")
+						.username(userDetails.getUsername())
+						.authorities(userDetails.getAuthorities())
+						.build()
 		);
 	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
 					HttpStatus.BAD_REQUEST);
@@ -88,6 +93,7 @@ public class AuthRestAPIs {
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
+		// TODO 09.04.2019: remove this switch and implement more reliable way of setting roles
 		strRoles.forEach(role -> {
 			switch (role) {
 				case "admin":

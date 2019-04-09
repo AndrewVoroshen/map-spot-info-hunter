@@ -12,8 +12,8 @@ import java.util.Set;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SignUpForm {
 
 	@NotBlank

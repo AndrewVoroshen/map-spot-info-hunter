@@ -1,7 +1,6 @@
 package com.voroshen.mapspotinfohunterapi.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
@@ -18,9 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Role {
 
 	@Id
