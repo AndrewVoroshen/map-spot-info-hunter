@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uq_email
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: password
+                  type: varchar(100)
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uq_username
+            tableName: user

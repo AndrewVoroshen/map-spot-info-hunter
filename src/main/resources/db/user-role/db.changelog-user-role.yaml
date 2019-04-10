@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-role-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: int8
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    references: user(id)
+              - column:
+                  name: role_id
+                  type: int8
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_id
+                    references: role(id)
+            tableName: user_role
+  - changeSet:
+      id: add-composite-unique-constraint-user-role-table
+      author: voroshen.av@gmail.com
+      changes:
+        - addUniqueConstraint:
+            columnNames: user_id, role_id
+            constraintName: uq_user_id_role_id
+            tableName: user_role

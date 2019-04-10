@@ -10,7 +10,7 @@ spring:
   # JPA config
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
@@ -22,7 +22,7 @@ spring:
   # Liquibase config
   liquibase:
     change-log: classpath:db/liquibase-changelog.yaml
-    enabled: false
+    enabled: true
 
 map-spot-info-hunter:
   app:
