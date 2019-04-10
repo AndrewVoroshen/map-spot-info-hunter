@@ -11,9 +11,9 @@ public class MapSpotInfoHunterApiApplication {
 	}
 }
 
-//
+
 //		GeoApiContext context = new GeoApiContext.Builder()
-//				.apiKey("AIzaSyDJ027nmE6e-NagCOJzUnbRl3qhLjs27_s")
+//				.apiKey("AIzaSyCjhz1msYO5dhUHUiUfnE7MaYLy3cynL6w")
 //				.build();
 //		GeocodingResult[] results = new GeocodingResult[0];
 //		try {
