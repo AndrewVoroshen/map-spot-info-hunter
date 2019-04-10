@@ -1,10 +1,10 @@
 databaseChangeLog:
   - include:
-      file: role/db.changelog-role.yaml
+      file: roles/db.changelog-roles.yaml
       relativeToChangelogFile: true
   - include:
-      file: user/db.changelog-user.yaml
+      file: users/db.changelog-users.yaml
       relativeToChangelogFile: true
   - include:
-      file: user-role/db.changelog-user-role.yaml
+      file: user-roles/db.changelog-user-roles.yaml
       relativeToChangelogFile: true

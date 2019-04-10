@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user-role-table
+      id: create-users-roles-table
       author: voroshen.av@gmail.com
       changes:
         - createTable:
@@ -11,20 +11,20 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_user_id
-                    references: user(id)
+                    references: users(id)
               - column:
                   name: role_id
                   type: int8
                   constraints:
                     nullable: false
                     foreignKeyName: fk_role_id
-                    references: role(id)
-            tableName: user_role
+                    references: roles(id)
+            tableName: user_roles
   - changeSet:
-      id: add-composite-unique-constraint-user-role-table
+      id: add-composite-unique-constraint-users-roles-table
       author: voroshen.av@gmail.com
       changes:
         - addUniqueConstraint:
             columnNames: user_id, role_id
             constraintName: uq_user_id_role_id
-            tableName: user_role
+            tableName: user_roles

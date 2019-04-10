@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user-table
+      id: create-users-table
       author: voroshen.av@gmail.com
       changes:
         - createTable:
@@ -29,4 +29,4 @@ databaseChangeLog:
                   constraints:
                     unique: true
                     uniqueConstraintName: uq_username
-            tableName: user
+            tableName: users

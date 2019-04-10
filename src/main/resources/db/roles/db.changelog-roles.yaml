@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-role-table
+      id: create-roles-table
       author: voroshen.av@gmail.com
       changes:
         - createTable:
@@ -17,9 +17,9 @@ databaseChangeLog:
                   constraints:
                     unique: true
                     uniqueConstraintName: uq_name
-            tableName: role
+            tableName: roles
   - changeSet:
-      id: insert-available-roles-to-role-table
+      id: insert-available-roles-to-roles-table
       author: voroshen.av@gmail.com
       changes:
         - sqlFile:
