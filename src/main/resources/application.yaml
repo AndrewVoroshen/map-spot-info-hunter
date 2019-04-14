@@ -28,3 +28,7 @@ map-spot-info-hunter:
   app:
     jwtSecret: mapSpotInfoHunterSecretKey
     jwtExpiration: 86400
+
+google:
+  maps:
+    apiKey: AIzaSyCjhz1msYO5dhUHUiUfnE7MaYLy3cynL6w

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-authorities-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uq_type
+            tableName: authorities
+  - changeSet:
+      id: insert-available-authorities-to-table
+      author: voroshen.av@gmail.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            endDelimeter: \nGO
+            path: changelogs/init.sql
+            relativeToChangelogFile: true
+            stripComments: true
+            splitStatements: true
