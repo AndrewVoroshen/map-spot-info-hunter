@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-spot-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: lng
+                  type: float8
+              - column:
+                  name: lat
+                  type: float8
+              - column:
+                  name: radius
+                  type: int4
+              - column:
+                  name: country
+                  type: varchar(225)
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: population_density
+                  type: float8
+              - column:
+                  name: weather
+                  type: varchar(255)
+            tableName: spot
+  - changeSet:
+      id: create-spot-language-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: spot_id
+                  type: int8
+                  constraints:
+                    foreignKeyName: fk_spot_id
+                    references: spot(id)
+              - column:
+                  name: language
+                  type: varchar(255)
+            tableName: spot_language
+  - changeSet:
+      id: create-spot-currency-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: spot_id
+                  type: int8
+                  constraints:
+                    foreignKeyName: fk_spot_id
+                    references: spot(id)
+              - column:
+                  name: currency
+                  type: varchar(255)
+            tableName: spot_currency

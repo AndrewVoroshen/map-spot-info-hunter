@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-spot-place-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: spot_id
+                  type: int8
+                  constraints:
+                    foreignKeyName: fk_spot_id
+                    references: spot(id)
+              - column:
+                  name: place_id
+                  type: varchar(200)
+                  constraints:
+                    foreignKeyName: fk_place_id
+                    references: place(id)
+            tableName: spot_place

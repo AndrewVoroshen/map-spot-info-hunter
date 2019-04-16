@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-spot-user-table
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: spot_id
+                  type: int8
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_spot_id
+                    references: spot(id)
+              - column:
+                  name: user_id
+                  type: int8
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+            tableName: spot_user

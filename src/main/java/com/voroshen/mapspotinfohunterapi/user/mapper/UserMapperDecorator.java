@@ -25,8 +25,9 @@ public abstract class UserMapperDecorator {
 	private AuthorityRepository authorityRepository;
 
 	@AfterMapping
-	public void voToEntity(final SignUpRequest request,
+	public void signUpRequestToUserEntity(final SignUpRequest request,
 						   @MappingTarget final UserEntity entity) {
+
 		entity.setPassword(encoder.encode(request.getPassword()));
 
 		List<String> authorities = request.getAuthorities();

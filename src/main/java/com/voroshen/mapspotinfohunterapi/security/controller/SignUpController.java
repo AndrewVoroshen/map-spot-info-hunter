@@ -28,11 +28,11 @@ public class SignUpController {
 	@PostMapping("/signup")
 	public ResponseEntity registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
-		UserEntity toCreate = userMapper.voToEntity(signUpRequest);
+		UserEntity toCreate = userMapper.signUpRequestToUserEntity(signUpRequest);
 
 		UserEntity toResponse = userService.create(toCreate);
 
-		SignUpResponse response = userMapper.entityToVo(toResponse);
+		SignUpResponse response = userMapper.userEntityToSignUpResponse(toResponse);
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

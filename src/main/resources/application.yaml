@@ -32,3 +32,6 @@ map-spot-info-hunter:
 google:
   maps:
     apiKey: AIzaSyCjhz1msYO5dhUHUiUfnE7MaYLy3cynL6w
+
+openweathermap:
+  apiKey: 1f3b610f0722a45b54db4a825627551a

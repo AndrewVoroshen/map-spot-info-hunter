@@ -8,3 +8,15 @@ databaseChangeLog:
   - include:
       file: user-authorities/db.changelog-user-authorities.yaml
       relativeToChangelogFile: true
+  - include:
+      file: spot/db.changelog-spot.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: place/db.changelog-place.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: spot-place/db.changelog-spot-place.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: spot-user/db.changelog-spot-user.yaml
+      relativeToChangelogFile: true

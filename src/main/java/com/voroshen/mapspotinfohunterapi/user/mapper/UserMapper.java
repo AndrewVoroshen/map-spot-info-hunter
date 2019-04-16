@@ -14,10 +14,10 @@ public interface UserMapper {
 			@Mapping(source = "authorities", target = "authorityEntities", ignore = true),
 			@Mapping(source = "password", target = "password", ignore = true)
 	})
-	UserEntity voToEntity(SignUpRequest vo);
+	UserEntity signUpRequestToUserEntity(SignUpRequest vo);
 
 	@Mappings({
 			@Mapping(source = "authorityEntities", target = "authorities")
 	})
-	SignUpResponse entityToVo(UserEntity entity);
+	SignUpResponse userEntityToSignUpResponse(UserEntity entity);
 }
