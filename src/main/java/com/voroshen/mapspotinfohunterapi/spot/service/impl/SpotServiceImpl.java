@@ -18,8 +18,6 @@ import com.voroshen.mapspotinfohunterapi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -31,7 +29,6 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@CacheConfig(cacheNames = {"spot"})
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SpotServiceImpl implements SpotService {
 
@@ -74,19 +71,7 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	@Cacheable
 	public SpotEntity get(Long id) {
-
-		try
-		{
-			System.out.println("Going to sleep for 5 Secs.. to simulate backend call.");
-			Thread.sleep(1000*5);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-
 		Long currentUserId = securityService.getCurrentUserId();
 		return spotRepository.findByIdAndUsersIdIn(id, currentUserId)
 				.orElseThrow(() -> new RuntimeException(String.format("Spot with id: %s for user with id: %s not found!", id, currentUserId)));
