@@ -3,7 +3,6 @@ package com.voroshen.mapspotinfohunterapi.user.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

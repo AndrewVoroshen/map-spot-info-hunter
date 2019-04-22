@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = { UserMapperDecorator.class, AuthorityMapper.class })
+@Mapper(componentModel = "spring", uses = {UserMapperDecorator.class, AuthorityMapper.class})
 public interface UserMapper {
 
 	@Mappings({

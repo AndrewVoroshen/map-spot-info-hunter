@@ -55,8 +55,6 @@ public class SpotEntity {
 	@Column(name = "language")
 	private List<String> languages;
 
-	private String weather;
-
 	@ElementCollection
 	@CollectionTable(
 			name = "spot_currency",

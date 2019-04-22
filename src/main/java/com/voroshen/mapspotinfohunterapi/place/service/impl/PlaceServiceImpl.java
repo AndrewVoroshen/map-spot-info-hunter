@@ -34,4 +34,9 @@ public class PlaceServiceImpl implements PlaceService {
 		}
 		return null;
 	}
+
+	@Override
+	public void delete(PlaceEntity toDelete) {
+		placeRepository.delete(toDelete);
+	}
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface PlaceService {
 
 	List<PlaceEntity> saveAll(Double lng, Double lat, Integer radius);
+
+	void delete(PlaceEntity toDelete);
 }

@@ -8,6 +8,7 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.NullValueMappingStrategy;
 
@@ -30,4 +31,6 @@ public interface SpotMapper {
 
 	@IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
 	List<SpotResponse> spotEntityListToSpotResponseList(List<SpotEntity> spotEntities);
+
+	void merge(SpotEntity source, @MappingTarget SpotEntity target);
 }

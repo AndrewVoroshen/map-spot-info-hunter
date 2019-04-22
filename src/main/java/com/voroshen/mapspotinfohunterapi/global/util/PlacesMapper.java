@@ -28,5 +28,4 @@ public class PlacesMapper {
 				.name(result.name)
 				.build();
 	}
-
 }

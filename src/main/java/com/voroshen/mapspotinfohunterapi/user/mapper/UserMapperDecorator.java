@@ -26,7 +26,7 @@ public abstract class UserMapperDecorator {
 
 	@AfterMapping
 	public void signUpRequestToUserEntity(final SignUpRequest request,
-						   @MappingTarget final UserEntity entity) {
+										  @MappingTarget final UserEntity entity) {
 
 		entity.setPassword(encoder.encode(request.getPassword()));
 

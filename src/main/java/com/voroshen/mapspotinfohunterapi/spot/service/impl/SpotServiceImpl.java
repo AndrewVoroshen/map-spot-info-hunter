@@ -6,14 +6,13 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.voroshen.mapspotinfohunterapi.global.util.GeocodingMapper;
-import com.voroshen.mapspotinfohunterapi.global.util.JsonOpenWeatherMapper;
 import com.voroshen.mapspotinfohunterapi.global.util.JsonRestCountriesMapper;
 import com.voroshen.mapspotinfohunterapi.place.service.PlaceService;
 import com.voroshen.mapspotinfohunterapi.security.service.SecurityService;
 import com.voroshen.mapspotinfohunterapi.spot.entity.SpotEntity;
+import com.voroshen.mapspotinfohunterapi.spot.mapper.SpotMapper;
 import com.voroshen.mapspotinfohunterapi.spot.repository.SpotRepository;
 import com.voroshen.mapspotinfohunterapi.spot.service.SpotService;
-import com.voroshen.mapspotinfohunterapi.user.entity.UserEntity;
 import com.voroshen.mapspotinfohunterapi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,25 +47,23 @@ public class SpotServiceImpl implements SpotService {
 
 	private final UserService userService;
 
+	private final SpotMapper spotMapper;
+
 	@Override
 	public SpotEntity save(SpotEntity toCreate) {
 
 		Optional<SpotEntity> savedSpotOpt = spotRepository.findByLngAndLat(toCreate.getLng(), toCreate.getLat());
-		savedSpotOpt.ifPresent(e -> setFieldsFromExistingEntity(toCreate, e));
 
-		toCreate.setRadius(300); // TODO: change dynamically
+		if (savedSpotOpt.isPresent()) {
+			spotMapper.merge(savedSpotOpt.get(), toCreate);
+		} else {
+			GeocodingMapper.map(toCreate, getGeocodingData(toCreate.getLng(), toCreate.getLat()));
+			JsonRestCountriesMapper.map(toCreate, getRestCountriesData(toCreate.getCountry()));
+			toCreate.setRadius((10000 / (toCreate.getPopulationDensity() > 1 ? toCreate.getPopulationDensity().intValue() : 1)));
+			toCreate.setPlaceEntities(new HashSet<>(placeService.saveAll(toCreate.getLng(), toCreate.getLat(), toCreate.getRadius())));
+		}
 
-		JsonOpenWeatherMapper.map(toCreate, getOpenWeatherData(toCreate.getLng(), toCreate.getLat()));
-		GeocodingMapper.map(toCreate, getGeocodingData(toCreate.getLng(), toCreate.getLat()));
-		JsonRestCountriesMapper.map(toCreate, getRestCountriesData(toCreate.getCountry()));
-
-		toCreate.setPlaceEntities(new HashSet<>(placeService.saveAll(toCreate.getLng(), toCreate.getLat(), toCreate.getRadius())));
-
-		toCreate.getUsers().add(
-				UserEntity.builder()
-						.id(securityService.getCurrentUserId())
-						.build()
-		);
+		toCreate.getUsers().add(userService.get(securityService.getCurrentUserId()));
 
 		return spotRepository.save(toCreate);
 	}
@@ -93,10 +90,15 @@ public class SpotServiceImpl implements SpotService {
 
 	public void deleteUserFromSpotEntity(Long userId, SpotEntity entity) {
 		entity.getUsers().remove(userService.get(userId));
-		spotRepository.save(entity);
+		if (CollectionUtils.isEmpty(entity.getUsers())) {
+			spotRepository.delete(entity);
+		} else {
+			spotRepository.save(entity);
+		}
 	}
 
-	private String getOpenWeatherData(Double lng, Double lat) {
+	@Override
+	public String getOpenWeatherData(Double lng, Double lat) {
 		return restTemplate.getForObject(
 				"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&units=metric&APPID={openWeatherMapApiKey}",
 				String.class,
@@ -121,10 +123,5 @@ public class SpotServiceImpl implements SpotService {
 		} catch (ApiException | InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException e) {
 			throw new RuntimeException("Bad coords!");
 		}
-	}
-
-	private void setFieldsFromExistingEntity(SpotEntity toCreate, SpotEntity saved) {
-		toCreate.setId(saved.getId());
-		toCreate.setUsers(saved.getUsers());
 	}
 }

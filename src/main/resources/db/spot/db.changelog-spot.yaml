@@ -65,3 +65,10 @@ databaseChangeLog:
                   name: currency
                   type: varchar(255)
             tableName: spot_currency
+  - changeSet:
+      id: delete-weather-column-in-spot-table
+      author: voroshen.av@gmail.com
+      changes:
+        - dropColumn:
+            columnName: weather
+            tableName: spot

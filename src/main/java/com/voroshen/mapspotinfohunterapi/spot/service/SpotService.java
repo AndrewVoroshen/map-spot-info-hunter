@@ -13,4 +13,6 @@ public interface SpotService {
 	List<SpotEntity> getAllForCurrentUser();
 
 	void deleteAllForCurrentUser();
+
+	String getOpenWeatherData(Double lng, Double lat);
 }

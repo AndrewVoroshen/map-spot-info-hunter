@@ -1,5 +1,6 @@
 package com.voroshen.mapspotinfohunterapi.spot.controller;
 
+import com.voroshen.mapspotinfohunterapi.global.util.JsonOpenWeatherConverter;
 import com.voroshen.mapspotinfohunterapi.spot.entity.SpotEntity;
 import com.voroshen.mapspotinfohunterapi.spot.mapper.SpotMapper;
 import com.voroshen.mapspotinfohunterapi.spot.service.SpotService;
@@ -40,6 +41,8 @@ public class SpotController {
 
 		SpotResponse response = spotMapper.spotEntityToSpotResponse(toResponse);
 
+		setWeather(response);
+
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -50,6 +53,8 @@ public class SpotController {
 		SpotEntity toResponse = spotService.get(id);
 
 		SpotResponse response = spotMapper.spotEntityToSpotResponse(toResponse);
+
+		setWeather(response);
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
@@ -62,6 +67,8 @@ public class SpotController {
 
 		List<SpotResponse> response = spotMapper.spotEntityListToSpotResponseList(toResponse);
 
+		response.forEach(this::setWeather);
+
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -72,5 +79,11 @@ public class SpotController {
 		spotService.deleteAllForCurrentUser();
 
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	private void setWeather(SpotResponse response) {
+		response.setWeather(
+				JsonOpenWeatherConverter.convert(spotService.getOpenWeatherData(response.getLng(), response.getLat()))
+		);
 	}
 }

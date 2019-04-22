@@ -18,7 +18,11 @@ public class JsonRestCountriesMapper {
 			RestCountriesResponse[] responses = mapper.readValue(toMap, RestCountriesResponse[].class);
 			if (responses.length > 0) {
 				entity.setCurrencies(responses[0].getCurrencies().stream().map(Currency::getName).collect(Collectors.toList()));
-				entity.setPopulationDensity(responses[0].getPopulation() / responses[0].getArea());
+				if (responses[0].getPopulation() != null && responses[0].getArea() != null && responses[0].getArea() > 0) {
+					entity.setPopulationDensity(responses[0].getPopulation() / responses[0].getArea());
+				} else {
+					throw new RuntimeException("Unable to retrieve population density data");
+				}
 				entity.setLanguages(responses[0].getLanguages().stream().map(Language::getName).collect(Collectors.toList()));
 			}
 		} catch (IOException e) {
