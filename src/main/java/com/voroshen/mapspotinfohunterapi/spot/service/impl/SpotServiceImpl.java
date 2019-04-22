@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -117,10 +118,9 @@ public class SpotServiceImpl implements SpotService {
 		try {
 			GeocodingResult[] results = GeocodingApi.reverseGeocode(context, new LatLng(lat, lng)).await();
 			return results[0];
-		} catch (ApiException | InterruptedException | IOException | NullPointerException e) {
-			e.printStackTrace();
+		} catch (ApiException | InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException e) {
+			throw new RuntimeException("Bad coords!");
 		}
-		return null;
 	}
 
 	private void setFieldsFromExistingEntity(SpotEntity toCreate, SpotEntity saved) {
