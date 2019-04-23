@@ -21,7 +21,7 @@ public class JsonRestCountriesMapper {
 				if (responses[0].getPopulation() != null && responses[0].getArea() != null && responses[0].getArea() > 0) {
 					entity.setPopulationDensity(responses[0].getPopulation() / responses[0].getArea());
 				} else {
-					throw new RuntimeException("Unable to retrieve population density data");
+					throw new RuntimeException("Unable to retrieve population density data!");
 				}
 				entity.setLanguages(responses[0].getLanguages().stream().map(Language::getName).collect(Collectors.toList()));
 			}

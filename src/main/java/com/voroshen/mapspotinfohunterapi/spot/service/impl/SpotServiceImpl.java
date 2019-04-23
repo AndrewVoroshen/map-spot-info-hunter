@@ -121,7 +121,7 @@ public class SpotServiceImpl implements SpotService {
 			GeocodingResult[] results = GeocodingApi.reverseGeocode(context, new LatLng(lat, lng)).await();
 			return results[0];
 		} catch (ApiException | InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException e) {
-			throw new RuntimeException("Bad coords!");
+			throw new RuntimeException(String.format("No spot found for lng: %s, lat: %s!", lng, lat));
 		}
 	}
 }

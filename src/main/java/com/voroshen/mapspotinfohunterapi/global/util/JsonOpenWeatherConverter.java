@@ -16,7 +16,7 @@ public class JsonOpenWeatherConverter {
 					"Humidity: " + response.getMain().getHumidity() + "%. " +
 					"Pressure: " + response.getMain().getPressure() + " hPa.";
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Unable retrieve weather data!");
 		}
 	}
 }
