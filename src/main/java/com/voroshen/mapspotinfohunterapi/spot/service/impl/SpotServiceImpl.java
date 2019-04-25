@@ -90,11 +90,12 @@ public class SpotServiceImpl implements SpotService {
 
 	public void deleteUserFromSpotEntity(Long userId, SpotEntity entity) {
 		entity.getUsers().remove(userService.get(userId));
-		if (CollectionUtils.isEmpty(entity.getUsers())) {
-			spotRepository.delete(entity);
-		} else {
-			spotRepository.save(entity);
-		}
+		spotRepository.save(entity); // shit hot fix
+//		if (CollectionUtils.isEmpty(entity.getUsers())) {
+//			spotRepository.delete(entity);
+//		} else {
+//			spotRepository.save(entity);
+//		}
 	}
 
 	@Override
